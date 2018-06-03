@@ -18,7 +18,7 @@ then
 fi
 if [ -z "$emulator_opts" ]
 then
-  emulator_opts="-screen multi-touch -no-boot-anim -noaudio -nojni -wipe-data -netfast -verbose -camera-back none -camera-front none -skip-adb-auth"
+  emulator_opts="-wipe-data -no-boot-anim -gpu off -netdelay none -netspeed full -skip-adb-auth -camera-back none -camera-front none -verbose"
 fi
 
 # Detect ip and forward ADB ports outside to outside interface
@@ -60,4 +60,4 @@ then
   done
 fi
 
-LIBGL_DEBUG=verbose ./qemu/linux-x86_64/qemu-system-i386 -avd x86 -ports $console_port,$adb_port $emulator_opts -qemu $QEMU_OPTS
+LIBGL_DEBUG=verbose ./qemu/linux-x86_64/qemu-system-i386 -avd x86 -ports $console_port,$adb_port $emulator_opts -qemu -m 2047 -enable-kvm $QEMU_OPTS
